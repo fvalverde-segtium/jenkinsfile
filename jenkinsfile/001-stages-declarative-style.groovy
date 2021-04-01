@@ -1,22 +1,13 @@
 pipeline {
   agent any
-  stages {
-
-    stage('Stage 1') {
-      steps {
-        script {
-          echo 'Stage 1'
-        }
-      }
-    }
-
-    stage('Stage 2') {
-      steps {
-        script {
-          echo 'Stage 2'
-        }
-      }
-    }
-
-  }
+  stage('Build') {
+   steps {
+       echo 'Building...'
+   }
+   post {
+       always {
+           jiraSendBuildInfo site: 'segtium.atlassian.net'
+       }
+   }
+}
 }
